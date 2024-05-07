@@ -10,6 +10,7 @@ import com.jmvillel.demo.spacecraft.domain.SpaceCraft;
 import com.jmvillel.demo.spacecraft.repository.SpaceCraftRepository;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class SpaceCraftService {
@@ -40,6 +41,17 @@ public class SpaceCraftService {
 		} else {
 			return spaceCraftRepository.save(spaceCraft);
 		}
+	}
+
+	public SpaceCraft update(SpaceCraft spaceCraft) {
+		
+		if(spaceCraft.getId() != null 
+				&& spaceCraftRepository.existsById(spaceCraft.getId())) {
+			return spaceCraftRepository.save(spaceCraft);
+		} else {
+			throw new EntityNotFoundException("SpaceCraft with id "+spaceCraft.getId()+" not exists.");
+		}
+
 	}
 
 }
