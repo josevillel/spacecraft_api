@@ -1,5 +1,7 @@
 package com.jmvillel.demo.spacecraft.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +31,13 @@ public class SpaceCraftController {
         return ResponseEntity.ok(spaceCraftService.findAllPaginated(pageable));
     }
 	
+	@GetMapping(path="/spacecrafts", params = {"query"})
+	public ResponseEntity<List<SpaceCraft>> findByName(String query) {
+		return ResponseEntity.ok(spaceCraftService.findAllByName(query));
+	}
+	
 	@GetMapping("/spacecraft/{id}")
 	public ResponseEntity<SpaceCraft> findById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(spaceCraftService.findOneById(id));
 	}
-	
-	
-	
 }
