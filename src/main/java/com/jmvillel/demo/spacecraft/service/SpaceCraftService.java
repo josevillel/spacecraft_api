@@ -20,4 +20,10 @@ public class SpaceCraftService {
 		return spaceCraftRepository.findAll(pageable);
 	}
 
+	public SpaceCraft findOneById(Long id) {
+		return spaceCraftRepository.findById(id).orElse(null);
+	}
+	
+	
+
 }

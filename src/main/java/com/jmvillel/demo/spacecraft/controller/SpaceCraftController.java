@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jmvillel.demo.spacecraft.domain.SpaceCraft;
@@ -27,6 +28,11 @@ public class SpaceCraftController {
     public ResponseEntity<Page<SpaceCraft>> findPage(final Pageable pageable) {
         return ResponseEntity.ok(spaceCraftService.findAllPaginated(pageable));
     }
+	
+	@GetMapping("/spacecraft/{id}")
+	public ResponseEntity<SpaceCraft> findById(@PathVariable("id") Long id) {
+		return ResponseEntity.ok(spaceCraftService.findOneById(id));
+	}
 	
 	
 	
