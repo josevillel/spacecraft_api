@@ -54,4 +54,14 @@ public class SpaceCraftService {
 
 	}
 
+	public Long delete(Long id) {
+		if(id != null 
+				&& spaceCraftRepository.existsById(id)) {
+			spaceCraftRepository.deleteById(id);
+			return id;
+		} else {
+			throw new EntityNotFoundException("SpaceCraft with id "+id+" not exists.");
+		}
+	}
+
 }
