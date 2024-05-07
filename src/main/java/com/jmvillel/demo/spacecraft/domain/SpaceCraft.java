@@ -15,13 +15,13 @@ public class SpaceCraft {
 	
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	/**
 	 * Name of the SpaceCraft
 	 */
-	@Column(length = 500)
+	@Column(length = 100)
 	private String name;
 	
 	

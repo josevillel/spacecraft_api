@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.jmvillel.demo.spacecraft.domain.SpaceCraft;
 import com.jmvillel.demo.spacecraft.repository.SpaceCraftRepository;
 
+import jakarta.persistence.EntityExistsException;
+
 @Service
 public class SpaceCraftService {
 	
@@ -29,7 +31,15 @@ public class SpaceCraftService {
 	public List<SpaceCraft> findAllByName(String name) {
 		return spaceCraftRepository.findAllByNameContainingIgnoreCase(name);
 	}
-	
-	
+
+	public SpaceCraft create(SpaceCraft spaceCraft) {
+		
+		if(spaceCraft.getId() != null 
+				&& spaceCraftRepository.existsById(spaceCraft.getId())) {
+			throw new EntityExistsException("SpaceCraft with id "+spaceCraft.getId()+" already exists.");
+		} else {
+			return spaceCraftRepository.save(spaceCraft);
+		}
+	}
 
 }
