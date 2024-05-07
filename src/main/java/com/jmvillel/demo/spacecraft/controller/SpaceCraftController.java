@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jmvillel.demo.spacecraft.domain.SpaceCraft;
-import com.jmvillel.demo.spacecraft.repository.SpaceCraftRepository;
+import com.jmvillel.demo.spacecraft.service.SpaceCraftService;
 
 @RestController
 public class SpaceCraftController {
 	
-	private final SpaceCraftRepository spaceCraftRepository;
+	private final SpaceCraftService spaceCraftService;
 	
-	SpaceCraftController(SpaceCraftRepository repository) {
-		this.spaceCraftRepository = repository;
+	SpaceCraftController(SpaceCraftService service) {
+		this.spaceCraftService = service;
 	}
 	
 	/**
@@ -25,7 +25,9 @@ public class SpaceCraftController {
 	 */
 	@GetMapping(path = "/spacecrafts", params = { "page", "size" })
     public ResponseEntity<Page<SpaceCraft>> findPage(final Pageable pageable) {
-        return ResponseEntity.ok(spaceCraftRepository.findAll(pageable));
-    }	
+        return ResponseEntity.ok(spaceCraftService.findAllPaginated(pageable));
+    }
+	
+	
 	
 }
