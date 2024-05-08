@@ -14,6 +14,13 @@ import jakarta.persistence.Id;
 public class SpaceCraft {
 	
 
+	public SpaceCraft() {}
+
+	public SpaceCraft(Long id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
