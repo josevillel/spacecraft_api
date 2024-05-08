@@ -1,7 +1,10 @@
 package com.jmvillel.demo.spacecraft.service;
 
 import java.util.List;
+import java.util.Locale;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,10 +18,15 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class SpaceCraftService {
 	
-	private final SpaceCraftRepository spaceCraftRepository;
+    
+	private static final Locale locale = LocaleContextHolder.getLocale();
 	
-	SpaceCraftService(SpaceCraftRepository repository) {
+	private final SpaceCraftRepository spaceCraftRepository;
+	private final MessageSource messageSource;
+	
+	SpaceCraftService(SpaceCraftRepository repository, MessageSource messageSource ) {
 		this.spaceCraftRepository = repository;
+		this.messageSource = messageSource;
 	}
 
 	public Page<SpaceCraft> findAllPaginated(Pageable pageable) {
@@ -31,7 +39,7 @@ public class SpaceCraftService {
 				&& spaceCraftRepository.existsById(id)) {
 			return spaceCraftRepository.findById(id).get();
 		} else {
-			throw new EntityNotFoundException("SpaceCraft with id "+id+" not exists.");
+			throw new EntityNotFoundException(messageSource.getMessage("error.entity.notFound", new Object[]{"Spacecraft",id}, locale));
 		}
 	}
 
@@ -43,7 +51,7 @@ public class SpaceCraftService {
 		
 		if(spaceCraft.getId() != null 
 				&& spaceCraftRepository.existsById(spaceCraft.getId())) {
-			throw new EntityExistsException("SpaceCraft with id "+spaceCraft.getId()+" already exists.");
+			throw new EntityExistsException(messageSource.getMessage("error.entity.exists", new Object[]{"Spacecraft",spaceCraft.getId()}, locale));
 		} else {
 			return spaceCraftRepository.save(spaceCraft);
 		}
@@ -55,7 +63,7 @@ public class SpaceCraftService {
 				&& spaceCraftRepository.existsById(spaceCraft.getId())) {
 			return spaceCraftRepository.save(spaceCraft);
 		} else {
-			throw new EntityNotFoundException("SpaceCraft with id "+spaceCraft.getId()+" not exists.");
+			throw new EntityNotFoundException(messageSource.getMessage("error.entity.notFound", new Object[]{"Spacecraft",spaceCraft.getId()}, locale));
 		}
 
 	}
