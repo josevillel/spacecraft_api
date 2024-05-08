@@ -3,6 +3,7 @@ package com.jmvillel.demo.spacecraft.service;
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,7 @@ public class SpaceCraftService {
 		this.messageSource = messageSource;
 	}
 
+	@Cacheable("spacecraftspaginated")
 	public Page<SpaceCraft> findAllPaginated(Pageable pageable) {
 		return spaceCraftRepository.findAll(pageable);
 	}
