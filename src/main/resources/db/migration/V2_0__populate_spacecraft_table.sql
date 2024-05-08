@@ -1,0 +1,14 @@
+INSERT INTO spacecraft (id,name) VALUES (1,'X-Wing');
+INSERT INTO spacecraft (id,name) VALUES (2,'Halcón Milenario');
+INSERT INTO spacecraft (id,name) VALUES (3,'TIE Fighter');
+INSERT INTO spacecraft (id,name) VALUES (4,'U.S.S. Enterprise');
+INSERT INTO spacecraft (id,name) VALUES (5,'Battlestar Galáctica');
+INSERT INTO spacecraft (id,name) VALUES (6,'Nostromo');
+INSERT INTO spacecraft (id,name) VALUES (7,'Odiseus');
+INSERT INTO spacecraft (id,name) VALUES (8,'Tardis');
+INSERT INTO spacecraft (id,name) VALUES (9,'Viper Mark II');
+INSERT INTO spacecraft (id,name) VALUES (10,'Discovery One');
+INSERT INTO spacecraft (id,name) VALUES (11,'Planet Express');
+INSERT INTO spacecraft (id,name) VALUES (12,'Milano');
+INSERT INTO spacecraft (id,name) VALUES (13,'Esclavo I');
+INSERT INTO spacecraft (id,name) VALUES (14,'Atlantis');
