@@ -26,7 +26,13 @@ public class SpaceCraftService {
 	}
 
 	public SpaceCraft findOneById(Long id) {
-		return spaceCraftRepository.findById(id).orElse(null);
+		
+		if(id != null 
+				&& spaceCraftRepository.existsById(id)) {
+			return spaceCraftRepository.findById(id).get();
+		} else {
+			throw new EntityNotFoundException("SpaceCraft with id "+id+" not exists.");
+		}
 	}
 
 	public List<SpaceCraft> findAllByName(String name) {
