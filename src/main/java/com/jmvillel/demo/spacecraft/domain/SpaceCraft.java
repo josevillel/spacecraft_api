@@ -21,6 +21,10 @@ public class SpaceCraft {
 		this.name = name;
 	}
 
+	public SpaceCraft(String name) {
+		this.name = name;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

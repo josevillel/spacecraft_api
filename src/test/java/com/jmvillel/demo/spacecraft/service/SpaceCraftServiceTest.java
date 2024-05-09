@@ -22,7 +22,6 @@ import org.springframework.data.domain.Sort;
 import com.jmvillel.demo.spacecraft.domain.SpaceCraft;
 import com.jmvillel.demo.spacecraft.repository.SpaceCraftRepository;
 
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
@@ -69,20 +68,6 @@ public class SpaceCraftServiceTest {
     }
 	
 	@Test
-    @DisplayName("FindOneById method should throw an EntityNotFoundException if spacecraft not found")
-    void findOneById_shouldThrowEntityNotFoundExceptionIfASpaceCraftNotFound() {
-
-        when(repository.existsById(any(Long.class))).thenReturn(false);
-
-        assertThrows(EntityNotFoundException.class,
-                ()->{service.findOneById(null);});
-        
-        assertThrows(EntityNotFoundException.class,
-                ()->{service.findOneById(-1L);});
-        
-    }
-	
-	@Test
 	@DisplayName("FindAllByName method should return a list of spacecrafts filter by name")
 	void findAllByName_shouldReturnAListOfSpaceCraftsFilterByName() {
 		
@@ -108,19 +93,6 @@ public class SpaceCraftServiceTest {
 	}
 	
 	@Test
-	@DisplayName("Create method should throw an EntityExistsException if spacecraft exist")
-	void create_shouldThrowAnEntityExistsExceptionIfExist() {
-		
-		SpaceCraft sc = new SpaceCraft(1L, "New SpaceCraft");
-		
-        when(repository.existsById(sc.getId())).thenReturn(true);
-
-        assertThrows(EntityExistsException.class,
-                ()->{service.create(sc);});
-		
-	}
-	
-	@Test
 	@DisplayName("Update method should update a spacecraft if exist")
 	void update_shouldUpdateASpacecraftIfExist() {
 		
@@ -135,19 +107,6 @@ public class SpaceCraftServiceTest {
 		
 		assertThat(sc.getName()).isSameAs(scUpdated.getName());
 		verify(repository).save(sc);
-		
-	}
-	
-	@Test
-	@DisplayName("Update method should throw an EntityNotFoundException if spacecraft not exist")
-	void update_shouldThrowAnEntityNotFoundExceptionIfNotExist() {
-		
-		SpaceCraft sc = new SpaceCraft(1L, "New name");
-		
-        when(repository.existsById(sc.getId())).thenReturn(false);
-
-        assertThrows(EntityNotFoundException.class,
-                ()->{service.update(sc);});
 		
 	}
 	

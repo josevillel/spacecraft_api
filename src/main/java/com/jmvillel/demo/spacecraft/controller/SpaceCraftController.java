@@ -40,22 +40,22 @@ public class SpaceCraftController {
 		return ResponseEntity.ok(spaceCraftService.findAllByName(query));
 	}
 	
-	@GetMapping("/spacecraft/{id}")
+	@GetMapping("/spacecrafts/{id}")
 	public ResponseEntity<SpaceCraft> findById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(spaceCraftService.findOneById(id));
 	}
 	
-	@PostMapping("/spacecraft")
+	@PostMapping("/spacecrafts")
 	public ResponseEntity<SpaceCraft> create(@RequestBody SpaceCraft spaceCraft) {
 		return ResponseEntity.ok(spaceCraftService.create(spaceCraft));
 	}
 	
-	@PutMapping("/spacecraft")
+	@PutMapping("/spacecrafts")
 	public ResponseEntity<SpaceCraft> update(@RequestBody SpaceCraft spaceCraft) {
 		return ResponseEntity.ok(spaceCraftService.update(spaceCraft));
 	}
 	
-	@DeleteMapping("/spacecraft/{id}")
+	@DeleteMapping("/spacecrafts/{id}")
 	public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
 		
 		return ResponseEntity.ok(spaceCraftService.delete(id));
