@@ -39,10 +39,10 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(1)
-	  @DisplayName("/spacecrafts GET endpoint should return the page of spacecrafts and the size requested in page and size params")
+	  @DisplayName("/api/spacecrafts GET endpoint should return the page of spacecrafts and the size requested in page and size params")
 	  void testFindPage() throws Exception {
 	       
-		  mockMvc.perform(get("/spacecrafts?page=0&size=4"))
+		  mockMvc.perform(get("/api/spacecrafts?page=0&size=4"))
 		  .andDo(print())
           .andExpect(status().isOk())
           .andExpect(MockMvcResultMatchers.jsonPath("$.totalPages").value(4));
@@ -51,10 +51,10 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(2)
-	  @DisplayName("/spacecrafts endpoint should return a list of spacecrafts filtered by name with the value requested in query param")
+	  @DisplayName("/api/spacecrafts/filter endpoint should return a list of spacecrafts filtered by name with the value requested in query param")
 	  void testFindByName() throws Exception {
 	       
-		  mockMvc.perform(get("/spacecrafts?query=Wing"))
+		  mockMvc.perform(get("/api/spacecrafts/filter?query=Wing"))
 		  .andDo(print())
           .andExpect(status().isOk())
           .andExpect(MockMvcResultMatchers.jsonPath("$[*].name", Matchers.everyItem(Matchers.containsString("Wing"))));
@@ -63,10 +63,10 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(3)
-	  @DisplayName("/spacecrafts/{id} GET endpoint should return a spacecraft with the id requested")
+	  @DisplayName("/api/spacecrafts/{id} GET endpoint should return a spacecraft with the id requested")
 	  void testFindOneById() throws Exception {
 	       
-		  mockMvc.perform(get("/spacecrafts/1"))
+		  mockMvc.perform(get("/api/spacecrafts/1"))
 		  .andDo(print())
           .andExpect(status().isOk())
           .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1));
@@ -75,10 +75,10 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(4)
-	  @DisplayName("/spacecrafts/{id} POST endpoint should return a spacecraft with the id requested")
+	  @DisplayName("/api/spacecrafts/{id} POST endpoint should return a spacecraft with the id requested")
 	  void testCreate() throws Exception {
 		  
-		  MvcResult result = mockMvc.perform(post("/spacecrafts")
+		  MvcResult result = mockMvc.perform(post("/api/spacecrafts")
 		    .contentType(MediaType.APPLICATION_JSON)
 		    .content("{\"name\": \"SpaceCraft I\"}")
 		    .accept(MediaType.APPLICATION_JSON))
@@ -94,10 +94,10 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(5)
-	  @DisplayName("/spacecrafts PUT endpoint should return a spacecraft with the changes updated")
+	  @DisplayName("/api/spacecrafts PUT endpoint should return a spacecraft with the changes updated")
 	  void testUpdate() throws Exception {
 		  
-		  MvcResult result = mockMvc.perform(put("/spacecrafts")
+		  MvcResult result = mockMvc.perform(put("/api/spacecrafts")
 		    .contentType(MediaType.APPLICATION_JSON)
 		    .content("{\"id\": 1,\"name\": \"SpaceCraft I\"}")
 		    .accept(MediaType.APPLICATION_JSON))
@@ -113,17 +113,17 @@ public class SpaceCraftControllerIntegrationTest {
 	  
 	  @Test
 	  @Order(6)
-	  @DisplayName("/spacecrafts DELETE endpoint should return an id of the spacecraft deleted")
+	  @DisplayName("/api/spacecrafts DELETE endpoint should return an id of the spacecraft deleted")
 	  void testDelete() throws Exception {
 		  
-		  MvcResult result = mockMvc.perform(delete("/spacecrafts/1"))
+		  MvcResult result = mockMvc.perform(delete("/api/spacecrafts/1"))
 		    .andExpect(status().isOk()).andReturn();
 		  
 		  String id = result.getResponse().getContentAsString();
 		  
 		  assertEquals(id,"1");
 		  
-		  final MvcResult resultEx = mockMvc.perform(get("/spacecrafts/1")).andReturn();
+		  final MvcResult resultEx = mockMvc.perform(get("/api/spacecrafts/1")).andReturn();
 		  
 		  assertEquals(resultEx.getResolvedException().getMessage(), "Entity Spacecraft for id 1 was not found.");
 	  }
