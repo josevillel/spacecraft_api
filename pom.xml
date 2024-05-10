@@ -11,11 +11,11 @@
 	<groupId>com.jmvillel.demo</groupId>
 	<artifactId>spacecraft</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>spacecraft</name>
-	<description>API CRUD naves espaciales</description>
+	<description>API CRUD SpaceCrafs</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 		<springdoc.version>2.5.0</springdoc.version>
 	</properties>
 	<dependencies>
