@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jmvillel.demo</groupId>
-	<artifactId>spacecraft</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>spacecraft-api</artifactId>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
-	<name>spacecraft</name>
-	<description>API CRUD SpaceCrafs</description>
+	<name>spacecraft-api</name>
+	<description>API CRUD SpaceCrafts</description>
 	<properties>
 		<java.version>17</java.version>
 		<springdoc.version>2.5.0</springdoc.version>
