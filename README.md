@@ -56,7 +56,7 @@ Puntos opcionales de mejora:
 
  - mvn clean package
 
- - java -jar target/spacecraft-api-1.0.0.jar
+ - java -jar target/spacecraft-api-0.0.1.jar
 
 ## Api docs
 
